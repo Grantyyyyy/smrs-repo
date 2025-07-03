@@ -1,0 +1,38 @@
+node_modules
+coverage
+*.log*
+.nuxt
+.nitro
+.cache
+.output
+.env
+dist
+.DS_Store
+.idea
+.eslintcache
+api-generator/typedoc.json
+**/.DS_Store
+
+# Node dependencies
+node_modules
+
+# Logs
+logs
+*.log
+
+# Misc
+.DS_Store
+.fleet
+.idea
+
+# Local env files
+.env
+.env.*
+!.env.example
+
+
+# Ignore Python virtual environments
+env/
+venv/
+ENV/
+.venv/
