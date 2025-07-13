@@ -1,7 +1,7 @@
 <template>
   <div class="bg-white p-4 rounded-xl">
-    <div class="flex items-center justify-between mb-4">
-       <h2 class="text-2xl font-bold">Students</h2>
+    <div class="flex items-center justify-between mb-4 mt-4">
+       <h2 class="text-3xl font-bold ml-8 ">Registered Students</h2>
     </div>
     
     <div class="flex flex-col bg-white rounded-lg shadow-sm m-6 w-[calc(100%-3rem)] h-[calc(100%-3rem)]">

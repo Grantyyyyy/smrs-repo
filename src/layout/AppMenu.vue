@@ -68,7 +68,14 @@ const model = ref([
         label: 'Test Route',
         items: [
             { label: 'Students', icon: 'pi pi-fw pi-users', to: '/pages/students' },
-            { label: 'Departments', icon: 'pi pi-fw pi-book', to: '/pages/departments' },
+            { label: 'Courses', icon: 'pi pi-fw pi-user', to: '/pages/admin/courses' },
+            { label: 'Departments', icon: 'pi pi-fw pi-building', to: '/pages/admin/departments' },
+            { label: 'Subject Offers', icon: 'pi pi-fw pi-briefcase', to: '/pages/admin/subjectoffers' },
+            { label: 'Subjects', icon: 'pi pi-fw pi-book', to: '/pages/admin/subjects' },
+
+            // { label: 'Test Offers', icon: 'pi pi-fw pi-briefcase', to: '/pages/admin/test' }, 
+
+
         ]
     },
 

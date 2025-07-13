@@ -7,8 +7,8 @@ from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
 
-from .models import User
-from .serializers import LoginSerializer, UserSerializer, StudentSerializer
+from .models import User, StudentProfile
+from .serializers import LoginSerializer, UserSerializer, StudentSerializer, StudentRegistrationSerializer
 
 
 
@@ -25,7 +25,7 @@ class LoginView(APIView):
         user = authenticate(username=username, password=password)
 
         if user:
-            if user.is_student and user.account_status == 'pending':
+            if user.is_student and user.student_profile.account_status == 'Pending':
                 return Response({'error': 'Your account is pending approval'}, status=status.HTTP_403_FORBIDDEN)
             else:
                 refresh = RefreshToken.for_user(user)
@@ -53,26 +53,38 @@ class LogoutView(APIView):
 class UserViewSet(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-
+    
     @action(detail=False, methods=['post'])
     def register_student(self, request):
-        serializer = self.get_serializer(data=request.data)
+        from .serializers import StudentRegistrationSerializer
+        serializer = StudentRegistrationSerializer(data=request.data)
+
+
         if serializer.is_valid():
-            user = serializer.save(is_student=True)
+            user = serializer.save()
             return Response({'status': 'student registered', 'user_id': user.id}, status=201)
         return Response(serializer.errors, status=400)
     
     
-    @action(detail=True, methods=['post'])
+    @action(detail=True, methods=['patch'])
     def approve_student(self, request, pk=None):
         try:
             student = self.get_object()
-            student.account_status = 'approved'
-            student.save()
-            return Response({'status': 'student approved'}, status=200)
+
+            if not student.is_student:
+                return Response({'error': 'This user is not a student'}, status=400)
+            
+            profile = student.student_profile
+            profile.account_status = 'Approved'
+            profile.save()
+
+            return Response({'status': 'Student approved'}, status=200)
         except User.DoesNotExist:
             return Response({'error': 'Student not found'}, status=404)
+        except StudentProfile.DoesNotExist:
+            return Response({'error': 'Student profile not found'}, status=404)
         
+
 class MeView(APIView):
 
     def get(self, request):

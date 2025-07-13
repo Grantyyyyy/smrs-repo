@@ -10,15 +10,39 @@ const router = createRouter({
             children: [
                 // Test
                 {
-                    path: '/pages/departments',
+                    path: '/pages/admin/departments',
                     name: 'departments',
-                    component: () => import('@/views/pages/Departments.vue'),
+                    component: () => import('@/views/pages/admin/Departments.vue'),
                 },
                 {
                     path: '/pages/students',
                     name: 'students',
                     component: () => import('@/views/pages/Students.vue'),
                 },
+
+                // {
+                //     path: '/pages/admin/test',
+                //     name: 'test-offers',
+                //     component: () => import('@/views/pages/admin/TestOffers.vue')
+                // },
+
+
+                {
+                    path: '/pages/admin/subjectoffers',
+                    name: 'subjectoffers',
+                    component: () => import('@/views/pages/admin/SubjectOffers.vue')
+                },
+                {
+                    path: '/pages/admin/subjects',
+                    name: 'admin-subjects',
+                    component: () => import('@/views/pages/admin/Subjects.vue')
+                },
+                {
+                    path: '/pages/admin/courses',
+                    name: 'courses',
+                    component: () => import('@/views/pages/admin/Courses.vue')
+                },
+
 
                 
 
@@ -35,7 +59,7 @@ const router = createRouter({
                 },
                 {
                     path: '/pages/instructor/subjects',
-                    name: 'subjects',
+                    name: 'instructor-subjects',
                     component: () => import('@/views/pages/instructor/Subjects.vue')
                 },
 
