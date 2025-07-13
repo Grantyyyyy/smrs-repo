@@ -299,10 +299,7 @@ const submitted = ref(false);
 const showSubjectTable = ref(true);
 const showAddSubjectDialog = ref(false);
 const showAddInstructorDialog = ref(false);
-
-// Dynamic Data Stores
 const subjects = ref([]);
-const schedules = ref([]);
 const newInstructor = ref({ 
   name: '', 
   scheduleId: null 
@@ -516,7 +513,6 @@ const addInstructor = async (scheduleID) => {
   }
 };
 
-
 const deleteSchedule = async (scheduleID) => {
   if (!scheduleID) {
     toast.add({ severity: 'error', summary: 'Error', detail: 'Schedule ID is missing', life: 3000 });
@@ -551,33 +547,6 @@ const confirmDeleteSchedule = (schedule) => {
 const confirmDeleteOfferedSubject = (subject) => {
   subjectToDelete.value = subject;
   deleteOfferedSubjectDialog.value = true;
-}
-
-const deleteOfferedSubject = async () => {
-  if (!subjectToDelete.value?.id) return;
-
-  loading.value = true;
-
-  try {
-    await SubjectOffering.delete(subjectToDelete.value.id);
-
-    toast.add({
-      severity: 'success', summary: 'Success', detail: 'Subject deleted successfully', life: 3000
-    });
-
-    const res = await SubjectOffering.getBydeparment(selectedDepartment.value.id);
-    subjectOffering.value = res.data;
-
-    deleteOfferedSubjectDialog.value = false;
-
-  } catch (error) {
-    toast.add({
-      severity: 'error', summary: 'Error', detail: error.message || 'Failed to delete subject', life: 3000
-    })
-    console.error('Failed to delete subject:', error);
-  } finally {
-    loading.value = false;
-  }
 }
 
 </script>
