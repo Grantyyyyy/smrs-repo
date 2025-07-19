@@ -32,7 +32,6 @@ class UserSerializer(serializers.ModelSerializer):
         return None
     
     def create(self, validated_data):
-        # Use Django's create_user to hash the password
         user = User.objects.create_user(
             username=validated_data['username'],
             password=validated_data['password']

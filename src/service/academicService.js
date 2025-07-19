@@ -6,7 +6,6 @@ const SUBJECT_OFFERING_API_URL = 'http://localhost:8000/api/offerings/';
 const SCHEDULE_API_URL = 'http://localhost:8000/api/schedules/';
 
 export const Department = {
-  // Fetch all departments
   getAll() {
     return axios.get(DEPARTMENT_API_URL)
   },
@@ -87,7 +86,6 @@ export const Course = {
     return axios.delete(`${COURSE_API_URL}${id}/`)
   }
 }
-
 export const SubjectOffering = {
   // Fetch all subject offerings
   getBydeparment(deparmentID) {
@@ -127,7 +125,6 @@ export const SubjectOffering = {
     return axios.delete(`${SUBJECT_OFFERING_API_URL}${id}/`)
   } 
 }
-
 export const Schedule = {
   getAll() {
     return axios.get(SCHEDULE_API_URL)

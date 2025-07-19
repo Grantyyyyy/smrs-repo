@@ -26,7 +26,7 @@ class LoginView(APIView):
 
         if user:
             if user.is_student and user.student_profile.account_status == 'Pending':
-                return Response({'error': 'Your account is pending approval'}, status=status.HTTP_403_FORBIDDEN)
+                return Response({'error': 'Your account is pending'}, status=status.HTTP_403_FORBIDDEN)
             else:
                 refresh = RefreshToken.for_user(user)
 

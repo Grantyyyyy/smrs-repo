@@ -66,3 +66,17 @@ class Schedule(models.Model):
 
     def __str__(self):
         return f"{self.subject_offering} - {self.day} - {self.time} - {self.instructor}"
+    
+
+class StudentClearance(models.Model):
+    STATUS_CHOICES = [
+        ('Pending', 'Pending'),
+        ('Approved', 'Approved'),
+    ]
+    student = models.ForeignKey(User, on_delete=models.CASCADE, related_name='clearances')
+    registrar_approval = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Pending')
+    instructor_approval = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Pending')
+    dsa_approval = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Pending')
+
+    def __str__(self):
+        return f"{self.student} - {self.registrar_approval} - {self.instructor_approval} - {self.dsa_approval}"
